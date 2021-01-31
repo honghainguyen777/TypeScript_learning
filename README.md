@@ -56,3 +56,14 @@
 
 ### Custom types
 - Sometimes the type specification of the parameters can get quite long-winded. To avoid repeation we can create a custom type: `type StringOrNum = string | number;` then use `StringOrNum` type to replace `string | number` in other lines of code.
+
+
+## DOM
+### The DOM interactions and Type Casting
+- We can do DOM queries as in JS with querySelector, etc.
+- EXP: `const a = document.querySelector('a');` -> this is fine in TS
+`console.log(a);` -> also fine in TS
+`console.log(a.href);` -> `Error: Object is possibly 'null'` -> Because *ts files do not have access to the corresponding html file. The compiler think it is an object of null
+--> add in an exclamation mark `!` at the end of the querySelector: `const a = document.querySelector('a')!;`; `!` says: this will return a value and not null
+- DOM manipulation in TS: it automatically contains special types for every DOM elements (ex. HTMLAnchorElement)
+- To do type casting to define the type of a variable/element: `const form = document.querySelector('.a-class') as HTMLFormElement;` (because when we use class in the query selector, TS does not know what is returned type, it only assume to be `Element`) -> we have to cast the type to the type we want. Some DOM elements: HTMLFormElement, HTMLInputElement, HTMLSelectElement, ...
