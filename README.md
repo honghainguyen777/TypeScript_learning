@@ -10,7 +10,8 @@
 - or: `tsc filename.ts filenamexx.js` (in some cases: `tsc filename.ts --outFile filenamexx.js`) (same directory)
 - or automatically compile (w for watch): `tsc filename.ts -w` (same directory)
 - To compile to a different JS version: `tsc --init` then go to the generated `tscofig.json` and change the `target` to the targeted JS version
-- If we want the *ts files and generated *js in different directory: go to `tscofig.json`, uncomment the `"rootDir": "./src"` and `"outDir": "./public"`
+- If we want the *ts files and generated *js in different directory: go to `tscofig.json`, uncomment the `"rootDir": "./src"` and `"outDir": "./public"` -> in the terminal: `tsc` or `tsc -w` to compile all *ts files
+- In case we have more *ts files outside the `src` folder, we can avoid compiling those files buy adding another attribute to the parent object of `compilerOptions` as: `{compilerOptions: {...}, "include" : ["src"]}`
 
 ## Types
 - Similar to JS, TS datatypes: number, string, boolean and object
@@ -34,8 +35,8 @@
 - if a key does not exist in the object we can not create it using: obj.newKey = value; -> once we define an object, we can't add addional properties (key-value pairs) to it
 - If we re-assign the variable to another object, the new objects has to contain the same keys with the same typed values as the initial object, no missing keys, extra keys, different typed values allow. (`let obj = {x:1, y:'hehe'}` now: `obj = {x:2, y:'kaka', z: 5)` or `= {x:3}` or `= {x:'huhu', y: 5}` not allowed) -> same structure, same type of object, same properties (same key names)
 - Objects in TS is extremely restricted but less bugs when developing large application
-- To declare a variable as an object: `let person1: object;`
-- To explicitly declare an object: `let person2: {name: string, age: number};`
-- An object of any types: `let mixedObj: {name: any, age: any};`
+- To declare a variable as an object: `let person1: object;` be careful, if we use: `person1 = {name: "John", age: 24}`, then we want to change the name property: `person1.name = "Philipp";` -> Error: `Property age does not exist on object` -> this is because we first we tell TS: `let person1: object;` that says person1 is just a plain object without any attributes. Even we assign `{name: "John", age: 24}` later to it, the compiler just thinks we are missing the `age` property. --> solution: use `interface`;
+- To explicitly declare an object: `let person2: {name: string, age: number};`. Remember we need to declare the person2: `person2 = {name: "hai", age: 30};` before using dot-notation or []: `person2.name = "John"`
+- An object of any types: `let mixedObj: {name: any, age: any};`. Again remember to declare the `mixedObj`;
 
 
