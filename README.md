@@ -47,3 +47,6 @@
 - If we do: `let result = add(3, 5);` the result will be infered the type from the returned value;
 - If we want to explicit the type of returned value: `const aFunc = (parameters):number => {}` -> so the returned type of the aFunc will be a number. BUT we don't need to do that because TS automatically infer the type of the returned value.
 - If we dont return anything from the function, we actually return a value called `void`
+
+### Custom types
+- Sometimes the type specification of the parameters can get quite long-winded. To avoid repeation we can create a custom type: `type StringOrNum = string | number;` then use `StringOrNum` type to replace `string | number` in other lines of code.

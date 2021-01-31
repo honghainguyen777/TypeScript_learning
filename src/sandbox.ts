@@ -104,32 +104,50 @@
 // person3 = {name: "hai", age: 30};
 // person3.name = "John";
 
-// Function
-let greeting1 = () => {
-    console.log("hello, world");
-}
-// greeting = "hi" // not allowed
-let greeting2: Function;
-greeting2 = () => {
-    console.log("hello, again");
+// // Function
+// let greeting1 = () => {
+//     console.log("hello, world");
+// }
+// // greeting = "hi" // not allowed
+// let greeting2: Function;
+// greeting2 = () => {
+//     console.log("hello, again");
+// }
+
+// const add = (a: number, b: number) => {
+//     console.log(a+b);
+// }
+// add(5, 10);
+// // add(5, "10") // not allowed
+
+// // optional parameter
+// const add2 = (a: number, b: number, c?:number|string) => {
+//     console.log(a + b);
+// } // return void
+// add2(1, 3); // c will be undefined
+// add2(1,2, 3); // ok
+
+// // inference
+// let minus = (a: number, b: number) => {
+//     return a - b;
+// }
+// let result = minus(15, 10);
+// console.log(result);
+
+
+// Type Aliases // loai bi danh
+type StringOrNum = string | number;
+type objWithName = {name: string, uid: StringOrNum};
+
+const logDetails = (uid: StringOrNum, item: string) => {
+    console.log(`${item} has a uid of ${uid}`);
 }
 
-const add = (a: number, b: number) => {
-    console.log(a+b);
+const greet = (user: objWithName) => {
+    console.log(`${user.name} says hello`);
 }
-add(5, 10);
-// add(5, "10") // not allowed
 
-// optional parameter
-const add2 = (a: number, b: number, c?:number|string) => {
-    console.log(a + b);
-} // return void
-add2(1, 3); // c will be undefined
-add2(1,2, 3); // ok
-
-// inference
-let minus = (a: number, b: number) => {
-    return a - b;
+const greet2 = (user: objWithName, age: number) => {
+    console.log(`${user.name} says hello`);
 }
-let result = minus(15, 10);
-console.log(result);
+
