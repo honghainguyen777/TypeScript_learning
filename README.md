@@ -87,3 +87,11 @@
 ## Modules (ES6 syntax)
 - to export variables, classes, etc. Add `export` in front of that: `export class AClass {}`
 - to import a module: `import {Module-to-import} from './dir-have-the-module/module-file.js'`. Here we have to use `.js` because at the end, the `ts` file will be compiled to JS.
+
+
+## Interfaces (in TS not in JS)
+- Interface allows us to enforce a certain structure of a class or an object. We can use it to describe what properties, methods and types of those properties and return types of those methods are
+- Look like a class but we don't use an interface to generate objects or create new objects based on the interface. We just use it to enforce a certain type of structure within classes or objects
+- Syntax: `interface IsPerson {name: string; age: number; speak(str: string): void; spend(num: number): number;}`
+- to use the interface to create an object called `me`: `const me: IsPerson = {name: 'hai', age: 30, speak(text: string): void {console.log(text)}, spend(amount: number): number {console.log(amount); return amount;}};`
+- We can not add an extra property to `me` because it is not inside the `IsPerson` and does not match the structure of the interface

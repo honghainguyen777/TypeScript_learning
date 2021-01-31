@@ -153,26 +153,51 @@
 
 
 // Function signatures
-let greet: (a: string, b: string) => void; // signitures
-greet = (name: string, greeting: string) => {
-    console.log(`${name} says ${greeting}`);
-}
-// this is not allowed
-// greet = (name: string, greeting: number) => {
+// let greet: (a: string, b: string) => void; // signitures
+// greet = (name: string, greeting: string) => {
 //     console.log(`${name} says ${greeting}`);
 // }
+// // this is not allowed
+// // greet = (name: string, greeting: number) => {
+// //     console.log(`${name} says ${greeting}`);
+// // }
 
-let calc: (a: number, b: number, c: string) => number;
-calc = (numOne: number, numTwo: number, action: string) => {
-    if (action === "add") {
-        return numOne + numTwo;
-    } else {
-        return numOne - numTwo;
+// let calc: (a: number, b: number, c: string) => number;
+// calc = (numOne: number, numTwo: number, action: string) => {
+//     if (action === "add") {
+//         return numOne + numTwo;
+//     } else {
+//         return numOne - numTwo;
+//     }
+// }
+
+// let logDetails: (obj: {name: string, age: number}) => void;
+// type person = {name: string, age: number};
+// logDetails = (ironhack: person) => {
+//     console.log(`${ironhack.name} is ${ironhack.age} years old`);
+// }
+
+
+// interfaceS
+interface IsPerson {
+    name: string;
+    age: number;
+    speak(a: string): void;
+    spend(a: number): number;
+}
+
+const me: IsPerson = {
+    name: 'hai',
+    age: 30,
+    speak(text: string): void {console.log(text);},
+    spend(amount: number): number {
+        console.log('I spent', amount);
+        return amount;
     }
 }
 
-let logDetails: (obj: {name: string, age: number}) => void;
-type person = {name: string, age: number};
-logDetails = (ironhack: person) => {
-    console.log(`${ironhack.name} is ${ironhack.age} years old`);
+const greetPerson = (person: IsPerson) => {
+    console.log('hello ', person.name);
 }
+
+greetPerson(me);
