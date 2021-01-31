@@ -73,6 +73,12 @@
 - Classes in TS is very similar to JS, BUT
 - In JS: `class AClass { constructor(a, b) {this.num1 = a; this.num2 = b}}`
 - In TS: if we do the same (`class AClass { constructor(a: number, b: number) {this.num1 = a; this.num2 = b}}`), we will get an error: `Property 'a' does not exist on the type 'AClass'`;
-- We have to define a, b before adding into the constructor: `class AClass { a: number; b: number; constructor(a: number, b: number) {this.num1 = a; this.num2 = b}}`
+- We have to define num1, num2 before adding into the constructor: `class AClass { num1: number; num2: number; constructor(a: number, b: number) {this.num1 = a; this.num2 = b}}`
+- Another way to define num1, num2 directly to the constructor is using modifier for each property: `class AClass { constructor(public num1: number, public num2: number){}}`
 - We can have an array of objects: `let arr: AClass[] = [];`
 - Same as JS: we can change value of a property: `let a = AClass(3, 5); a.num1 = 7;`
+### Access modifiers (Public, Private, Readonly)
+- Public: Default modifier for property in the class: `class AClass { num1: number; num2: number; constructor(a: number, b: number) {this.num1 = a; this.num2 = b}}` === `class AClass { public num1: number; public num2: number; constructor(a: number, b: number) {this.num1 = a; this.num2 = b}}`
+- Private: Not allow to access outside of the Class: `class AClass { private num1: number; num2: number; constructor(a: number, b: number) {this.num1 = a; this.num2 = b}}` then create an instance: `let a = AClass(3, 5)` if we do: `a.num1` or `a.num1 = 7` -> Error
+- Readonly: we can read a property from outside of the class, but we can't re-assign/change it: we can do `console.log(a.num1)`  but not `a.num1 = 7`; also we can't modifed the num1 in a method inside the Class: `sum() {this.num1 = 3} `-> error
+
