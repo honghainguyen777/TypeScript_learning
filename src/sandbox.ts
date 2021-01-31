@@ -135,19 +135,44 @@
 // console.log(result);
 
 
-// Type Aliases // loai bi danh
-type StringOrNum = string | number;
-type objWithName = {name: string, uid: StringOrNum};
+// // Type Aliases // loai bi danh
+// type StringOrNum = string | number;
+// type objWithName = {name: string, uid: StringOrNum};
 
-const logDetails = (uid: StringOrNum, item: string) => {
-    console.log(`${item} has a uid of ${uid}`);
+// const logDetails = (uid: StringOrNum, item: string) => {
+//     console.log(`${item} has a uid of ${uid}`);
+// }
+
+// const greet = (user: objWithName) => {
+//     console.log(`${user.name} says hello`);
+// }
+
+// const greet2 = (user: objWithName, age: number) => {
+//     console.log(`${user.name} says hello`);
+// }
+
+
+// Function signatures
+let greet: (a: string, b: string) => void; // signitures
+greet = (name: string, greeting: string) => {
+    console.log(`${name} says ${greeting}`);
+}
+// this is not allowed
+// greet = (name: string, greeting: number) => {
+//     console.log(`${name} says ${greeting}`);
+// }
+
+let calc: (a: number, b: number, c: string) => number;
+calc = (numOne: number, numTwo: number, action: string) => {
+    if (action === "add") {
+        return numOne + numTwo;
+    } else {
+        return numOne - numTwo;
+    }
 }
 
-const greet = (user: objWithName) => {
-    console.log(`${user.name} says hello`);
+let logDetails: (obj: {name: string, age: number}) => void;
+type person = {name: string, age: number};
+logDetails = (ironhack: person) => {
+    console.log(`${ironhack.name} is ${ironhack.age} years old`);
 }
-
-const greet2 = (user: objWithName, age: number) => {
-    console.log(`${user.name} says hello`);
-}
-

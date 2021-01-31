@@ -19,6 +19,7 @@
 - Like JS we can declare a varible with out specifying a value to it. That variable will have any types and can be re-assigned to any types: `let x;` or `let x: any;` then we store any type in x: `x = 5; x = "char";` 
 - But this is TS, it better to explicitly infer a type from usage: `let character: string;` `let number: number;` `let isRaining: boolean;`.
 - Union variable: `let aVar: number|string;` -> aVar can store a string or a number;
+
 ### Arrays
 - If the array is assigned with values that have same type -> A Value with a different type can not be pushed/added in
 - Of course, we can not re-assigned the array variable to another value with different datatypes
@@ -47,6 +48,11 @@
 - If we do: `let result = add(3, 5);` the result will be infered the type from the returned value;
 - If we want to explicit the type of returned value: `const aFunc = (parameters):number => {}` -> so the returned type of the aFunc will be a number. BUT we don't need to do that because TS automatically infer the type of the returned value.
 - If we dont return anything from the function, we actually return a value called `void`
+
+#### Function Signatures
+- describe general structure of a function what arguments it takes in and what type of data it returns
+- EXP: `let greet: (a: string, b: string) => void;` signitures: a function that take two arguments `a` - a string and `b` - a string and return `void` value;
+- Base on the above function signitures: greet = (name: string, greeting: string) => {...no return}; if we do greet = (name: string, age: number) => {...} -> Error (need to match the greet signature exactly).
 
 ### Custom types
 - Sometimes the type specification of the parameters can get quite long-winded. To avoid repeation we can create a custom type: `type StringOrNum = string | number;` then use `StringOrNum` type to replace `string | number` in other lines of code.
