@@ -7,8 +7,10 @@
 ## Compile
 - Browser can not understand TypeScript file (*ts extension) -> need to be compiled to JS file
 - In terminal: `tsc filename.ts`
-- or: `tsc filename.ts filenamexx.js` (in some cases: `tsc filename.ts --outFile filenamexx.js`)
-- or automatically compile (w for watch): `tsc filename.ts -w`
+- or: `tsc filename.ts filenamexx.js` (in some cases: `tsc filename.ts --outFile filenamexx.js`) (same directory)
+- or automatically compile (w for watch): `tsc filename.ts -w` (same directory)
+- To compile to a different JS version: `tsc --init` then go to the generated `tscofig.json` and change the `target` to the targeted JS version
+- If we want the *ts files and generated *js in different directory: go to `tscofig.json`, uncomment the `"rootDir": "./src"` and `"outDir": "./public"`
 
 ## Types
 - Similar to JS, TS datatypes: number, string, boolean and object
