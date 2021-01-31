@@ -67,3 +67,12 @@
 --> add in an exclamation mark `!` at the end of the querySelector: `const a = document.querySelector('a')!;`; `!` says: this will return a value and not null
 - DOM manipulation in TS: it automatically contains special types for every DOM elements (ex. HTMLAnchorElement)
 - To do type casting to define the type of a variable/element: `const form = document.querySelector('.a-class') as HTMLFormElement;` (because when we use class in the query selector, TS does not know what is returned type, it only assume to be `Element`) -> we have to cast the type to the type we want. Some DOM elements: HTMLFormElement, HTMLInputElement, HTMLSelectElement, ...
+
+
+## Classes
+- Classes in TS is very similar to JS, BUT
+- In JS: `class AClass { constructor(a, b) {this.num1 = a; this.num2 = b}}`
+- In TS: if we do the same (`class AClass { constructor(a: number, b: number) {this.num1 = a; this.num2 = b}}`), we will get an error: `Property 'a' does not exist on the type 'AClass'`;
+- We have to define a, b before adding into the constructor: `class AClass { a: number; b: number; constructor(a: number, b: number) {this.num1 = a; this.num2 = b}}`
+- We can have an array of objects: `let arr: AClass[] = [];`
+- Same as JS: we can change value of a property: `let a = AClass(3, 5); a.num1 = 7;`
