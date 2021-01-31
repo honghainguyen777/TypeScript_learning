@@ -178,7 +178,53 @@
 // }
 
 
-// interfaceS
+// interfaces
+interface HasFormatter {
+    format():string;
+}
+
+
+class Invoice implements HasFormatter{
+    // client: string;
+    // details: string;
+    // amount: number;
+    
+    constructor(
+        readonly client: string,
+        private details: string,
+        public amount: number,
+    ) {}
+
+    format() {
+        return `${this.client} owes $${this.amount} for ${this.details}`;
+    }
+}
+
+class Payment implements HasFormatter {
+    constructor(
+        readonly recipient: string,
+        private details: string,
+        public amount: number,
+    ) {}
+
+    format() {
+        return `${this.recipient} is owed $${this.amount} for ${this.details}`;
+    }
+}
+
+// now create docOne and docTwo that have the HasFormatter interface
+let docOne: HasFormatter;
+let docTwo: HasFormatter;
+
+// because the Invoice and Payment classes has the same format as Hasformatter -> valid
+docOne = new Invoice('Thao', 'web work', 2500);
+docTwo = new Payment('Mario', 'killing a fly', 2021000);
+
+let docs: HasFormatter[] = [];
+docs.push(docOne);
+docs.push(docTwo);
+
+
 interface IsPerson {
     name: string;
     age: number;
@@ -201,3 +247,6 @@ const greetPerson = (person: IsPerson) => {
 }
 
 greetPerson(me);
+
+
+

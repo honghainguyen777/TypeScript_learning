@@ -95,3 +95,8 @@
 - Syntax: `interface IsPerson {name: string; age: number; speak(str: string): void; spend(num: number): number;}`
 - to use the interface to create an object called `me`: `const me: IsPerson = {name: 'hai', age: 30, speak(text: string): void {console.log(text)}, spend(amount: number): number {console.log(amount); return amount;}};`
 - We can not add an extra property to `me` because it is not inside the `IsPerson` and does not match the structure of the interface
+
+### Interfaces with Classes
+- `interface HasFormatter {format():string;}`
+- When we use an interface for a class: `class Invoice implements HasFormatter {constructor....format() {return 'a string';}}` -> The `Invoice` class must follow the structure of the `HasFormatter`. Here the `Invoice` class must has `format()` method.
+- If we define a variable: `let some: HasFormatter;` the some varible now can only store an instance of a class that has the same structure as `HasFormatter`. `some = new Invoice(parameters);`
