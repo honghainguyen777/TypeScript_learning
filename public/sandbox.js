@@ -2,17 +2,6 @@
 // let character = 'Hai' // this variable can now only be a string
 // let age = 30; // age only now hold a number
 // let isRich = false; // isRich now hold a boolean
-var __assign = (this && this.__assign) || function () {
-    __assign = Object.assign || function(t) {
-        for (var s, i = 1, n = arguments.length; i < n; i++) {
-            s = arguments[i];
-            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
-                t[p] = s[p];
-        }
-        return t;
-    };
-    return __assign.apply(this, arguments);
-};
 // // a function
 // const circ = (diameter: number) => {
 //     return diameter * Math.PI;
@@ -230,29 +219,55 @@ var __assign = (this && this.__assign) || function () {
 // let docTwo = addUID('hello') // allow!!!
 // console.log(docOne);
 // console.log(docOne.name) // not it is allowed
-// to have only object as argument:
-var addUID = function (obj) {
-    var uid = Math.floor(Math.random() * 100);
-    return __assign(__assign({}, obj), { uid: uid }); // return a new object with all properties in obj and added in a new property uid
-};
-// let docTwo = addUID('hello') // not allow!!!
-// or even more restricted:
-var addUID1 = function (obj) {
-    var uid = Math.floor(Math.random() * 100);
-    return __assign(__assign({}, obj), { uid: uid }); // return a new object with all properties in obj and added in a new property uid
-}; // new object an the name property must be a string
+// // to have only object as argument:
+// const addUID = <T extends object>(obj: T) => {
+//     let uid = Math.floor(Math.random() * 100);
+//     return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
+// }
+// // let docTwo = addUID('hello') // not allow!!!
+// // or even more restricted:
+// const addUID1 = <T extends {name: string}>(obj: T) => {
+//     let uid = Math.floor(Math.random() * 100);
+//     return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
+// } // new object an the name property must be a string
+// // with interfaces
+// interface Resource {
+//     uid: number;
+//     resourceName: string;
+//     data: object; 
+// }
+// const docThree: Resource = {
+//     uid: 1,
+//     resourceName: 'person',
+//     data: {name: 'hai'}
+// }
+// // but we can pass in data: "a string" -> data must be an object
+// interface Resource2<T> {
+//     uid: number;
+//     resourceName: string;
+//     data: T; 
+// }
+// const docFour: Resource2<string> = {
+//     uid: 1,
+//     resourceName: 'person',
+//     data: "hai"
+// }
+// const docFive: Resource2<string[]> = {
+//     uid: 1,
+//     resourceName: 'person',
+//     data: ["hai", "Lena"]
+// }
+// Enums
+var ResourceType;
+(function (ResourceType) {
+    ResourceType[ResourceType["BOOK"] = 0] = "BOOK";
+    ResourceType[ResourceType["AUTHOR"] = 1] = "AUTHOR";
+    ResourceType[ResourceType["FILM"] = 2] = "FILM";
+    ResourceType[ResourceType["DIRECTOR"] = 3] = "DIRECTOR";
+    ResourceType[ResourceType["PERSON"] = 4] = "PERSON";
+})(ResourceType || (ResourceType = {}));
 var docThree = {
     uid: 1,
-    resourceName: 'person',
+    resourceName: ResourceType.BOOK,
     data: { name: 'hai' }
-};
-var docFour = {
-    uid: 1,
-    resourceName: 'person',
-    data: "hai"
-};
-var docFive = {
-    uid: 1,
-    resourceName: 'person',
-    data: ["hai", "Lena"]
 };

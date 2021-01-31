@@ -110,3 +110,8 @@
 ### Generics in interfaces
 - `interface Resource<T> {uid: number; resourceName: string; data: T;} `-> now `data` can be anytype 
 - To do that: `const doc: Resource<string> = {...; data: "a string"};` or `const doc: Resource<object> = {...; data: {name: 'hai'};`, etc.
+
+### Enums - another type in TS
+- a special type in TS which allows us to store a set of constants of keywords and associate them with a numeric value
+- syntax: enum ResourceType {BOOK, AUTHOR, FILM, DIRECTOR, PERSON}; // from 0 to 4
+- From that, we can access to all the different resources without remembering what number is associated to the resource: ResourceType.AUTHOR (here the number associate to AUTHOR is 1)

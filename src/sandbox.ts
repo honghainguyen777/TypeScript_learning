@@ -272,47 +272,63 @@
 // console.log(docOne);
 // console.log(docOne.name) // not it is allowed
 
-// to have only object as argument:
-const addUID = <T extends object>(obj: T) => {
-    let uid = Math.floor(Math.random() * 100);
-    return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
-}
+// // to have only object as argument:
+// const addUID = <T extends object>(obj: T) => {
+//     let uid = Math.floor(Math.random() * 100);
+//     return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
+// }
 
-// let docTwo = addUID('hello') // not allow!!!
-// or even more restricted:
-const addUID1 = <T extends {name: string}>(obj: T) => {
-    let uid = Math.floor(Math.random() * 100);
-    return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
-} // new object an the name property must be a string
+// // let docTwo = addUID('hello') // not allow!!!
+// // or even more restricted:
+// const addUID1 = <T extends {name: string}>(obj: T) => {
+//     let uid = Math.floor(Math.random() * 100);
+//     return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
+// } // new object an the name property must be a string
 
-// with interfaces
-interface Resource {
+
+// // with interfaces
+// interface Resource {
+//     uid: number;
+//     resourceName: string;
+//     data: object; 
+// }
+
+// const docThree: Resource = {
+//     uid: 1,
+//     resourceName: 'person',
+//     data: {name: 'hai'}
+// }
+
+// // but we can pass in data: "a string" -> data must be an object
+// interface Resource2<T> {
+//     uid: number;
+//     resourceName: string;
+//     data: T; 
+// }
+
+// const docFour: Resource2<string> = {
+//     uid: 1,
+//     resourceName: 'person',
+//     data: "hai"
+// }
+
+// const docFive: Resource2<string[]> = {
+//     uid: 1,
+//     resourceName: 'person',
+//     data: ["hai", "Lena"]
+// }
+
+// Enums
+enum ResourceType {BOOK, AUTHOR, FILM, DIRECTOR, PERSON}
+
+interface Resource<T> {
     uid: number;
-    resourceName: string;
-    data: object; 
-}
-
-const docThree: Resource = {
-    uid: 1,
-    resourceName: 'person',
-    data: {name: 'hai'}
-}
-
-// but we can pass in data: "a string" -> data must be an object
-interface Resource2<T> {
-    uid: number;
-    resourceName: string;
+    resourceName: number;
     data: T; 
 }
 
-const docFour: Resource2<string> = {
+const docThree: Resource<object> = {
     uid: 1,
-    resourceName: 'person',
-    data: "hai"
-}
-
-const docFive: Resource2<string[]> = {
-    uid: 1,
-    resourceName: 'person',
-    data: ["hai", "Lena"]
+    resourceName: ResourceType.BOOK, // number will be 0
+    data: {name: 'hai'}
 }
