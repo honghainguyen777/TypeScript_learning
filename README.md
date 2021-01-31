@@ -59,18 +59,6 @@
 ### Custom types
 - Sometimes the type specification of the parameters can get quite long-winded. To avoid repeation we can create a custom type: `type StringOrNum = string | number;` then use `StringOrNum` type to replace `string | number` in other lines of code.
 
-
-## DOM
-### The DOM interactions and Type Casting
-- We can do DOM queries as in JS with querySelector, etc.
-- EXP: `const a = document.querySelector('a');` -> this is fine in TS
-`console.log(a);` -> also fine in TS
-`console.log(a.href);` -> `Error: Object is possibly 'null'` -> Because *ts files do not have access to the corresponding html file. The compiler think it is an object of null
---> add in an exclamation mark `!` at the end of the querySelector: `const a = document.querySelector('a')!;`; `!` says: this will return a value and not null
-- DOM manipulation in TS: it automatically contains special types for every DOM elements (ex. HTMLAnchorElement)
-- To do type casting to define the type of a variable/element: `const form = document.querySelector('.a-class') as HTMLFormElement;` (because when we use class in the query selector, TS does not know what is returned type, it only assume to be `Element`) -> we have to cast the type to the type we want. Some DOM elements: HTMLFormElement, HTMLInputElement, HTMLSelectElement, ...
-
-
 ## Classes
 - Classes in TS is very similar to JS, BUT
 - In JS: `class AClass { constructor(a, b) {this.num1 = a; this.num2 = b}}`
@@ -100,3 +88,25 @@
 - `interface HasFormatter {format():string;}`
 - When we use an interface for a class: `class Invoice implements HasFormatter {constructor....format() {return 'a string';}}` -> The `Invoice` class must follow the structure of the `HasFormatter`. Here the `Invoice` class must has `format()` method.
 - If we define a variable: `let some: HasFormatter;` the some varible now can only store an instance of a class that has the same structure as `HasFormatter`. `some = new Invoice(parameters);`
+
+## DOM
+### The DOM interactions and Type Casting
+- We can do DOM queries as in JS with querySelector, etc.
+- EXP: `const a = document.querySelector('a');` -> this is fine in TS
+`console.log(a);` -> also fine in TS
+`console.log(a.href);` -> `Error: Object is possibly 'null'` -> Because *ts files do not have access to the corresponding html file. The compiler think it is an object of null
+--> add in an exclamation mark `!` at the end of the querySelector: `const a = document.querySelector('a')!;`; `!` says: this will return a value and not null
+- DOM manipulation in TS: it automatically contains special types for every DOM elements (ex. HTMLAnchorElement)
+- To do type casting to define the type of a variable/element: `const form = document.querySelector('.a-class') as HTMLFormElement;` (because when we use class in the query selector, TS does not know what is returned type, it only assume to be `Element`) -> we have to cast the type to the type we want. Some DOM elements: `HTMLFormElement`, `HTMLInputElement`, `HTMLSelectElement`, ...
+
+## Generics
+- Generics allow us to create reusable blocks of code which can be used with different types
+- `const addUID = (obj: object) => {let uid = Math.floor(Math.random() * 100); return {...obj, uid};}`
+`let docOne = addUID({ name: 'hai', age: 30});` -> ok: `console.log(docOne);` but not allowed: `console.log(docOne.name);` because we're not specifying exactly what this object should be and it doesn't know when it return the new object `{...obj, uid}` what properties were on the object that we passed in, so it doesn't know `name` exists on the object. We not captured it inside the function, so when it returns `{...obj, uid}` it does not know what properties it's going to output. -> we can't do `docOne.name` or `docOne.age` -> we can solve it by using a generic
+- Using a generic: `const addUID = <T>(obj: T) => {...}` -> `<T>` will capture whatever item we pass in to the function and it captures what properties are going to on it if it's an object and so when we return it, all properties in that object are known.
+- `const addUID = <T>(obj: T)...` now we can pass anything beside object in the addUID. To restrict the passed-in argument to be an object, we can do: `const addUID = <T extends object>(obj: T)...`
+- More restricted: `const addUID = <T extends {name: string}>(obj: T) => {...}` -> `obj` must be and object with a string `name` property
+
+### Generics in interfaces
+- `interface Resource<T> {uid: number; resourceName: string; data: T;} `-> now `data` can be anytype 
+- To do that: `const doc: Resource<string> = {...; data: "a string"};` or `const doc: Resource<object> = {...; data: {name: 'hai'};`, etc.

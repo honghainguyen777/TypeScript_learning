@@ -178,75 +178,141 @@
 // }
 
 
-// interfaces
-interface HasFormatter {
-    format():string;
-}
+// // interfaces
+// interface HasFormatter {
+//     format():string;
+// }
 
 
-class Invoice implements HasFormatter{
-    // client: string;
-    // details: string;
-    // amount: number;
+// class Invoice implements HasFormatter{
+//     // client: string;
+//     // details: string;
+//     // amount: number;
     
-    constructor(
-        readonly client: string,
-        private details: string,
-        public amount: number,
-    ) {}
+//     constructor(
+//         readonly client: string,
+//         private details: string,
+//         public amount: number,
+//     ) {}
 
-    format() {
-        return `${this.client} owes $${this.amount} for ${this.details}`;
-    }
+//     format() {
+//         return `${this.client} owes $${this.amount} for ${this.details}`;
+//     }
+// }
+
+// class Payment implements HasFormatter {
+//     constructor(
+//         readonly recipient: string,
+//         private details: string,
+//         public amount: number,
+//     ) {}
+
+//     format() {
+//         return `${this.recipient} is owed $${this.amount} for ${this.details}`;
+//     }
+// }
+
+// // now create docOne and docTwo that have the HasFormatter interface
+// let docOne: HasFormatter;
+// let docTwo: HasFormatter;
+
+// // because the Invoice and Payment classes has the same format as Hasformatter -> valid
+// docOne = new Invoice('Thao', 'web work', 2500);
+// docTwo = new Payment('Mario', 'killing a fly', 2021000);
+
+// let docs: HasFormatter[] = [];
+// docs.push(docOne);
+// docs.push(docTwo);
+
+
+// interface IsPerson {
+//     name: string;
+//     age: number;
+//     speak(a: string): void;
+//     spend(a: number): number;
+// }
+
+// const me: IsPerson = {
+//     name: 'hai',
+//     age: 30,
+//     speak(text: string): void {console.log(text);},
+//     spend(amount: number): number {
+//         console.log('I spent', amount);
+//         return amount;
+//     }
+// }
+
+// const greetPerson = (person: IsPerson) => {
+//     console.log('hello ', person.name);
+// }
+
+// greetPerson(me);
+
+
+// Generics
+// const addUID = (obj: object) => {
+//     let uid = Math.floor(Math.random() * 100);
+//     return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
+// }
+
+// let docOne = addUID({name: 'hai', age: 40});
+
+// console.log(docOne);
+// console.log(docOne.name) // not allow
+
+// // to solve that:
+// const addUID = <T>(obj: T) => {
+//     let uid = Math.floor(Math.random() * 100);
+//     return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
+// }
+
+// let docOne = addUID({name: 'hai', age: 40});
+// let docTwo = addUID('hello') // allow!!!
+
+// console.log(docOne);
+// console.log(docOne.name) // not it is allowed
+
+// to have only object as argument:
+const addUID = <T extends object>(obj: T) => {
+    let uid = Math.floor(Math.random() * 100);
+    return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
 }
 
-class Payment implements HasFormatter {
-    constructor(
-        readonly recipient: string,
-        private details: string,
-        public amount: number,
-    ) {}
+// let docTwo = addUID('hello') // not allow!!!
+// or even more restricted:
+const addUID1 = <T extends {name: string}>(obj: T) => {
+    let uid = Math.floor(Math.random() * 100);
+    return {...obj, uid}; // return a new object with all properties in obj and added in a new property uid
+} // new object an the name property must be a string
 
-    format() {
-        return `${this.recipient} is owed $${this.amount} for ${this.details}`;
-    }
+// with interfaces
+interface Resource {
+    uid: number;
+    resourceName: string;
+    data: object; 
 }
 
-// now create docOne and docTwo that have the HasFormatter interface
-let docOne: HasFormatter;
-let docTwo: HasFormatter;
-
-// because the Invoice and Payment classes has the same format as Hasformatter -> valid
-docOne = new Invoice('Thao', 'web work', 2500);
-docTwo = new Payment('Mario', 'killing a fly', 2021000);
-
-let docs: HasFormatter[] = [];
-docs.push(docOne);
-docs.push(docTwo);
-
-
-interface IsPerson {
-    name: string;
-    age: number;
-    speak(a: string): void;
-    spend(a: number): number;
+const docThree: Resource = {
+    uid: 1,
+    resourceName: 'person',
+    data: {name: 'hai'}
 }
 
-const me: IsPerson = {
-    name: 'hai',
-    age: 30,
-    speak(text: string): void {console.log(text);},
-    spend(amount: number): number {
-        console.log('I spent', amount);
-        return amount;
-    }
+// but we can pass in data: "a string" -> data must be an object
+interface Resource2<T> {
+    uid: number;
+    resourceName: string;
+    data: T; 
 }
 
-const greetPerson = (person: IsPerson) => {
-    console.log('hello ', person.name);
+const docFour: Resource2<string> = {
+    uid: 1,
+    resourceName: 'person',
+    data: "hai"
 }
 
-greetPerson(me);
-
-
-
+const docFive: Resource2<string[]> = {
+    uid: 1,
+    resourceName: 'person',
+    data: ["hai", "Lena"]
+}
