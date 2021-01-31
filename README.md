@@ -12,6 +12,8 @@
 - To compile to a different JS version: `tsc --init` then go to the generated `tscofig.json` and change the `target` to the targeted JS version
 - If we want the *ts files and generated *js in different directory: go to `tscofig.json`, uncomment the `"rootDir": "./src"` and `"outDir": "./public"` -> in the terminal: `tsc` or `tsc -w` to compile all *ts files
 - In case we have more *ts files outside the `src` folder, we can avoid compiling those files buy adding another attribute to the parent object of `compilerOptions` as: `{compilerOptions: {...}, "include" : ["src"]}`
+- To work with ES6: in `tscofig.json` change `"module"` from `commonjs` to `es2015` and `target` from `es5` to `es6`
+- to use Modules (ES6): in the index.html where the js file is specified add: type="module" (`<script type="module" src='app.js'></script>`)
 
 ## Types
 - Similar to JS, TS datatypes: number, string, boolean and object
@@ -82,3 +84,6 @@
 - Private: Not allow to access outside of the Class: `class AClass { private num1: number; num2: number; constructor(a: number, b: number) {this.num1 = a; this.num2 = b}}` then create an instance: `let a = AClass(3, 5)` if we do: `a.num1` or `a.num1 = 7` -> Error
 - Readonly: we can read a property from outside of the class, but we can't re-assign/change it: we can do `console.log(a.num1)`  but not `a.num1 = 7`; also we can't modifed the num1 in a method inside the Class: `sum() {this.num1 = 3} `-> error
 
+## Modules (ES6 syntax)
+- to export variables, classes, etc. Add `export` in front of that: `export class AClass {}`
+- to import a module: `import {Module-to-import} from './dir-have-the-module/module-file.js'`. Here we have to use `.js` because at the end, the `ts` file will be compiled to JS.
