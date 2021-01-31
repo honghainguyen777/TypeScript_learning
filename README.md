@@ -59,6 +59,20 @@
 ### Custom types
 - Sometimes the type specification of the parameters can get quite long-winded. To avoid repeation we can create a custom type: `type StringOrNum = string | number;` then use `StringOrNum` type to replace `string | number` in other lines of code.
 
+
+### Enums - another type in TS
+- a special type in TS which allows us to store a set of constants of keywords and associate them with a numeric value
+- syntax: enum ResourceType {BOOK, AUTHOR, FILM, DIRECTOR, PERSON}; // from 0 to 4
+- From that, we can access to all the different resources without remembering what number is associated to the resource: ResourceType.AUTHOR (here the number associate to AUTHOR is 1)
+
+### Tuples - a type in TS
+- In array, we can change a value and type of an element at any position 
+- But with tuple, once we define a certain position being a certain type, we then can't change that type in that position
+- syntax: `let tup: [string, number, boolean] = ['hai', 25, true]` -> so the type at each position now is constrained. We can do `tup[0] = "join"` but not `tup[0] = 10;`
+- It is useful in some case like spread operator in a function
+If we have an array: `let values = ["hai", "jana", 10];` we can not use `aFunction(...values);` because the function does not now what datatype of each element in values is.
+To solve that, we can use tuple: `let values: [string, string, number];` and then `values = ["hai", "jana", 10];` now we can use it as argument in a function: `aFunction(...values);`
+
 ## Classes
 - Classes in TS is very similar to JS, BUT
 - In JS: `class AClass { constructor(a, b) {this.num1 = a; this.num2 = b}}`
@@ -111,7 +125,3 @@
 - `interface Resource<T> {uid: number; resourceName: string; data: T;} `-> now `data` can be anytype 
 - To do that: `const doc: Resource<string> = {...; data: "a string"};` or `const doc: Resource<object> = {...; data: {name: 'hai'};`, etc.
 
-### Enums - another type in TS
-- a special type in TS which allows us to store a set of constants of keywords and associate them with a numeric value
-- syntax: enum ResourceType {BOOK, AUTHOR, FILM, DIRECTOR, PERSON}; // from 0 to 4
-- From that, we can access to all the different resources without remembering what number is associated to the resource: ResourceType.AUTHOR (here the number associate to AUTHOR is 1)
