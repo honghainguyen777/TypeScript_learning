@@ -39,4 +39,11 @@
 - To explicitly declare an object: `let person2: {name: string, age: number};`. Remember we need to declare the person2: `person2 = {name: "hai", age: 30};` before using dot-notation or []: `person2.name = "John"`
 - An object of any types: `let mixedObj: {name: any, age: any};`. Again remember to declare the `mixedObj`;
 
-
+### Function
+- Explicit a function: `let funcName: Function;`
+- Like other types, we can not re-assign the funcName to another type
+- Parameter in TS function: `const add = (a: number, b: number, c?:number|string) => {....};`  Here `a` and `b` can only be numbers. `c` with a `?` tells us that `c` is optional parameter. If we do: `add(3, 5);` -> `a=3`, `b=5` and `c=undefined`;
+- If we want `c` has a default value, we dont need to use `?`: `const add = (a: number, b: number, c:number|string = 10) => {....};` (`c` is still optional);
+- If we do: `let result = add(3, 5);` the result will be infered the type from the returned value;
+- If we want to explicit the type of returned value: `const aFunc = (parameters):number => {}` -> so the returned type of the aFunc will be a number. BUT we don't need to do that because TS automatically infer the type of the returned value.
+- If we dont return anything from the function, we actually return a value called `void`

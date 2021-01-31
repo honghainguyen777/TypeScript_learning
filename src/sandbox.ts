@@ -82,24 +82,54 @@
 // let mixedArr: any[] = [];
 
 // objects
-let person1: object;
-person1 = {name: "John", age: 24};
-// person1.age = 5; //-> an error: Property age does not exist on type(object)
+// let person1: object;
+// person1 = {name: "John", age: 24};
+// // person1.age = 5; //-> an error: Property age does not exist on type(object)
 
-// let person1 = {name: "John", age: 24};
-// person1.age = 5;
+// // let person1 = {name: "John", age: 24};
+// // person1.age = 5;
 
 
-// explicit an objects:
-let person2: {
-    name: string,
-    age: number
+// // explicit an objects:
+// let person2: {
+//     name: string,
+//     age: number
+// }
+// person2 = {name: "John", age: 24};
+// // object of any types
+// let person3: {
+//     name: any, // need to give a value otherwise we can't assign a person3.name = "John" later
+//     age: any
+// }
+// person3 = {name: "hai", age: 30};
+// person3.name = "John";
+
+// Function
+let greeting1 = () => {
+    console.log("hello, world");
 }
-person2 = {name: "John", age: 24};
-// object of any types
-let person3: {
-    name: any, // need to give a value otherwise we can't assign a person3.name = "John" later
-    age: any
+// greeting = "hi" // not allowed
+let greeting2: Function;
+greeting2 = () => {
+    console.log("hello, again");
 }
-person3 = {name: "hai", age: 30};
-person3.name = "John";
+
+const add = (a: number, b: number) => {
+    console.log(a+b);
+}
+add(5, 10);
+// add(5, "10") // not allowed
+
+// optional parameter
+const add2 = (a: number, b: number, c?:number|string) => {
+    console.log(a + b);
+} // return void
+add2(1, 3); // c will be undefined
+add2(1,2, 3); // ok
+
+// inference
+let minus = (a: number, b: number) => {
+    return a - b;
+}
+let result = minus(15, 10);
+console.log(result);

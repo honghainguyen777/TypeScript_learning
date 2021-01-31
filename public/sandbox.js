@@ -69,15 +69,47 @@
 // // array of any types
 // let mixedArr: any[] = [];
 // objects
-var person1;
-person1 = { name: "John", age: 24 };
-// person1.age = 5; //-> an error: Property age does not exist on type(object)
-// let person1 = {name: "John", age: 24};
-// person1.age = 5;
-// explicit an objects:
-var person2;
-person2 = { name: "John", age: 24 };
-// object of any types
-var person3;
-person3 = { name: "hai", age: 30 };
-person3.name = "John";
+// let person1: object;
+// person1 = {name: "John", age: 24};
+// // person1.age = 5; //-> an error: Property age does not exist on type(object)
+// // let person1 = {name: "John", age: 24};
+// // person1.age = 5;
+// // explicit an objects:
+// let person2: {
+//     name: string,
+//     age: number
+// }
+// person2 = {name: "John", age: 24};
+// // object of any types
+// let person3: {
+//     name: any, // need to give a value otherwise we can't assign a person3.name = "John" later
+//     age: any
+// }
+// person3 = {name: "hai", age: 30};
+// person3.name = "John";
+// Function
+var greeting1 = function () {
+    console.log("hello, world");
+};
+// greeting = "hi" // not allowed
+var greeting2;
+greeting2 = function () {
+    console.log("hello, again");
+};
+var add = function (a, b) {
+    console.log(a + b);
+};
+add(5, 10);
+// add(5, "10") // not allowed
+// optional parameter
+var add2 = function (a, b, c) {
+    console.log(a + b);
+}; // return void
+add2(1, 3); // c will be undefined
+add2(1, 2, 3); // ok
+// inference
+var minus = function (a, b) {
+    return a - b;
+};
+var result = minus(15, 10);
+console.log(result);
