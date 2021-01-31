@@ -53,7 +53,8 @@ let isRaining: boolean;
 age = 30;
 // age = "hello" // not allowed
 // a variable with any types
-let a;
+// let a; // or
+let a: any;
 a = 5;
 a = "haha";
 // but it better to explicitly specify a type to a variable from usage
@@ -75,6 +76,8 @@ let aVar: number|string;
 aVar = 5; // ok
 aVar = "hello" // ok
 // aVar = false; // not allowed
+// array of any types
+let mixedArr: any[] = [];
 
 // objects
 let person1: object;
@@ -85,3 +88,10 @@ let person2: {
     name: string,
     age: number
 }
+// object of any types
+let person3: {
+    name: any,
+    age: any
+}
+person3.name = "hello";
+person3.name = 25; // okay

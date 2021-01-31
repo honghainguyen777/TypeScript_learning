@@ -43,6 +43,7 @@ var isRaining;
 age = 30;
 // age = "hello" // not allowed
 // a variable with any types
+// let a; // or
 var a;
 a = 5;
 a = "haha";
@@ -62,8 +63,14 @@ var aVar;
 aVar = 5; // ok
 aVar = "hello"; // ok
 // aVar = false; // not allowed
+// array of any types
+var mixedArr = [];
 // objects
 var person1;
 person1 = { name: "John", age: 24 };
 // explicit an objects:
 var person2;
+// object of any types
+var person3;
+person3.name = "hello";
+person3.name = 25; // okay

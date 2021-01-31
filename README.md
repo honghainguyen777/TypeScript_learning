@@ -10,10 +10,10 @@
 - or: `tsc filename.ts filenamexx.js` (in some cases: `tsc filename.ts --outFile filenamexx.js`)
 - or automatically compile (w for watch): `tsc filename.ts -w`
 
-## Datatypes
+## Types
 - Similar to JS, TS datatypes: number, string, boolean and object
 - TS is type check or type restricted, that mean once a datatype is assigned to a variable, the variable can only be re-assigned another value with the same datatype
-- Like JS we can declare a varible with out specifying a value to it. That variable will have any types and can be re-assigned to any types: `let x; x = 5; x = "char";`
+- Like JS we can declare a varible with out specifying a value to it. That variable will have any types and can be re-assigned to any types: `let x;` or `let x: any;` then we store any type in x: `x = 5; x = "char";` 
 - But this is TS, it better to explicitly infer a type from usage: `let character: string;` `let number: number;` `let isRaining: boolean;`.
 - Union variable: `let aVar: number|string;` -> aVar can store a string or a number;
 ### Arrays
@@ -22,7 +22,8 @@
 - If the array is assigned with mixed datatypes -> the array can be modifed (pushed/changed) with different datatyped values regardless of order/index
 - To define an array containning only a specific type: `let StrArray: string[];` `let numArray: number[];` etc. No error appear in the editor when pushing a value to the array: `numArray.push(5);` --> receiving an `TypeError: can not read property 'push' of undefined` in the browser's console because we have not yet declared the array.
 - Sometime to initialize it with an empty array: `let numArray: number[] = [];` -> `numArray.push(5);` works
-- Union array (mixed types): `let mixed: (string|number)[] = [];` -> now strings and numbers can be stored inside the mixed array
+- Union array (mixed types): `let mixed: (string|number)[] = [];` -> now strings and numbers can be stored inside the mixed array.
+- An array of any types: `let mixedArr: any[] = [];`
 
 ### Objects
 - Objects can contain multple types
@@ -33,5 +34,6 @@
 - Objects in TS is extremely restricted but less bugs when developing large application
 - To declare a variable as an object: `let person1: object;`
 - To explicitly declare an object: `let person2: {name: string, age: number};`
-- 
+- An object of any types: `let mixedObj: {name: any, age: any};`
+
 
